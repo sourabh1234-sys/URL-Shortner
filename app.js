@@ -16,10 +16,14 @@ const app = express();
 const PORT =  process.env.PORT || 8002
 
 
-mongoose.connect(process.env.MONOGO_URL).then((e)=>{
+mongoose.connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then(() => {
     console.log("DB Connected");
-    
-})
+}).catch((error) => {
+    console.error("DB Connection Error: ", error);
+});
 
 app.set('view engine' , 'ejs')
 app.set('views' ,  path.resolve('./views'))
